@@ -1,0 +1,12 @@
+# Copia este archivo como .dev.vars (sin .example) para correr el servidor en tu computador.
+# Son los "secretos" del servidor. NUNCA se suben a GitHub ni se escriben en el código de la página.
+CODIGO_INVITACION=RC-ADMIN-2026
+# Veces que se repite el cifrado de la contraseña (más = más seguro y más lento). Opcional.
+# (En producción se configura en wrangler.toml: 15000 para el plan gratuito. Aquí solo si quieres probar otro valor.)
+# ITERACIONES_CLAVE=15000
+
+# --- Correo de las cotizaciones (en tu computador NO se envían correos reales: las pruebas usan un servidor falso) ---
+# Estas 3 líneas hacen que "npm run api:probar" funcione. Para el correo REAL, ver docs/BACKEND.md (sección Correo).
+RESEND_API_KEY=clave-de-prueba
+CORREO_EMPRESA=empresa@ejemplo.com
+URL_API_CORREO=http://127.0.0.1:8790/emails

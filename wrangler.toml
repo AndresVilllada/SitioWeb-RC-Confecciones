@@ -1,0 +1,20 @@
+# Configuración de Cloudflare Pages (sitio + API) y de la base de datos D1.
+name = "rc-confecciones"
+compatibility_date = "2026-01-01"
+pages_build_output_dir = "./dist"
+
+# --- Ajuste para el PLAN GRATUITO de Cloudflare ---
+# El plan gratuito corta cada petición a los 10 ms de CPU. Medido: cifrar una contraseña con
+# 100.000 iteraciones gasta ~20 ms (se pasaría del límite); con 15.000 gasta ~3 ms.
+# Si algún día se pasa al plan de pago, se puede subir este número (por ejemplo a 100000).
+# (El código de invitación NO va aquí: es un secreto, ver docs/BACKEND.md.)
+[vars]
+ITERACIONES_CLAVE = "15000"
+
+[[d1_databases]]
+binding = "DB"                      # así se llama la base dentro del código: env.DB
+database_name = "rc-confecciones"
+migrations_dir = "migrations"       # cambios de tablas: ver migrations/ y docs/BACKEND.md
+# En local este valor da igual. Antes de publicar, pega aquí el id real que entrega:
+#   npx wrangler d1 create rc-confecciones
+database_id = "00000000-0000-0000-0000-000000000000"

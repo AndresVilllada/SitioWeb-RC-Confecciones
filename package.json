@@ -1,0 +1,38 @@
+{
+  "name": "rc-confecciones",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:demo": "vite build --config vite.config.demo.js",
+    "api:crear-tablas": "wrangler d1 migrations apply rc-confecciones --local",
+    "api:nueva-migracion": "wrangler d1 migrations create rc-confecciones",
+    "api:sembrar": "node scripts/generar-seed.mjs && wrangler d1 execute rc-confecciones --local --file=db/seed.sql",
+    "api:dev": "wrangler pages dev dist --port 8788",
+    "api:probar": "node --test pruebas/api.test.mjs",
+    "nube:iniciar-sesion": "wrangler login",
+    "nube:crear-bd": "wrangler d1 create rc-confecciones",
+    "nube:tablas": "wrangler d1 migrations apply rc-confecciones --remote",
+    "nube:sembrar": "node scripts/generar-seed.mjs && wrangler d1 execute rc-confecciones --remote --file=db/seed.sql",
+    "nube:crear-proyecto": "wrangler pages project create rc-confecciones --production-branch=main",
+    "nube:codigo": "wrangler pages secret put CODIGO_INVITACION --project-name=rc-confecciones",
+    "nube:correo-clave": "wrangler pages secret put RESEND_API_KEY --project-name=rc-confecciones",
+    "nube:correo-destino": "wrangler pages secret put CORREO_EMPRESA --project-name=rc-confecciones",
+    "nube:publicar": "vite build && wrangler pages deploy dist --project-name=rc-confecciones --branch=main",
+    "nube:verificar": "vite build && wrangler pages functions build --outdir=.wrangler/verificacion"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.3.4",
+    "vite": "5.4.11",
+    "vite-plugin-singlefile": "2.3.0",
+    "wrangler": "^4.163.0"
+  }
+}
